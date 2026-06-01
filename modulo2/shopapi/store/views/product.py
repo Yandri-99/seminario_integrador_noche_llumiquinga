@@ -15,7 +15,7 @@ from store.pagination          import StandardPagination
 
 
 class ProductViewSet(viewsets.ModelViewSet):
-    queryset           = Product.objects.select_related('category').all()
+    queryset           = Product.objects.select_related('category').filter(is_active=True)
     serializer_class   = ProductSerializer
     permission_classes = [IsStaffOrReadOnly]
     pagination_class   = StandardPagination

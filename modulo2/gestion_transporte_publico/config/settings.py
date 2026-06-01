@@ -1,4 +1,3 @@
-# config/settings.py
 from datetime import timedelta
 from pathlib import Path
 from decouple import config, Csv
@@ -21,7 +20,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
     'corsheaders',
-    'store',
+    'transporte',
 ]
 
 MIDDLEWARE = [
@@ -57,12 +56,12 @@ DATABASES = {
         'HOST':     config('DB_HOST', default='localhost'),
         'PORT':     config('DB_PORT', default='5432'),
         'TEST': {
-            'NAME': config('TEST_DB_NAME', default='shopapi_test_db'),
+            'NAME': config('TEST_DB_NAME', default='transporte_test_db'),
         },
     }
 }
 
-LANGUAGE_CODE      = 'en-us'
+LANGUAGE_CODE      = 'es-ec'
 TIME_ZONE          = 'America/Guayaquil'
 USE_I18N           = True
 USE_TZ             = True
@@ -81,7 +80,7 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter',
     ],
-    'DEFAULT_PAGINATION_CLASS': 'store.pagination.StandardPagination',
+    'DEFAULT_PAGINATION_CLASS': 'transporte.pagination.StandardPagination',
     'PAGE_SIZE': 10,
 }
 
