@@ -21,3 +21,4 @@ console.log(`Total: ${total}€`);
 for (const [indice, nombre] of nombres.entries()) {
   console.log(`${indice + 1}. ${nombre}`);
 }
+
