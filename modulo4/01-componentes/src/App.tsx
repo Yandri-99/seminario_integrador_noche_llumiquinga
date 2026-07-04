@@ -1,6 +1,13 @@
 // src/App.tsx
 import WelcomeBanner from './components/WelcomeBanner'
 import UserGreeting from './components/UserGreeting'
+import DigitalCounter from './use-state/DigitalCounter'
+import UserProfileForm from './use-state/UserProfileForm'
+import TaskManager from './use-state/TaskManager'
+import DocumentTitle from './use-effect/DocumentTitle'
+import FetchUser from './use-effect/FetchUser'
+import AutoFocusForm from './use-reft/AutoFocusForm'
+import InlineEditor from './use-reft/InlineEditor'
 
 // ┌──────────────────────────────────────────────────────────────────────────┐
 // │  Cambia PASO y guarda (Ctrl+S) para navegar entre componentes.          │
@@ -18,7 +25,7 @@ import UserGreeting from './components/UserGreeting'
 // │  12  ProductCatalogList  — lista con renderizado condicional de items   │
 // │  13  UserProfileCard     — ejercicio: props complejas + rol             │
 // └──────────────────────────────────────────────────────────────────────────┘
-const PASO = 2
+const PASO = 18
 
 const fruits = [
   { name: 'Manzana', emoji: '🍎', calories: 52 },
@@ -35,8 +42,8 @@ const catalog = [
 
 export default function App() {
   const content =
-    PASO ===  1 ? <WelcomeBanner /> :
-    PASO ===  2 ? <UserGreeting name="Ana García" occupation="Desarrolladora Frontend" /> :/*
+    /*PASO ===  1 ? <WelcomeBanner /> :
+    PASO ===  2 ? <UserGreeting name="Ana García" occupation="Desarrolladora Frontend" /> :
     PASO ===  3 ? <CurrentDateDisplay /> :
     PASO ===  4 ? (
       <div style={{ display: 'flex', gap: 12 }}>
@@ -92,6 +99,17 @@ export default function App() {
         bio="Desarrolladora fullstack con 5 años de experiencia."
       />
     ) :*/
+    //Hooks: state
+    PASO === 14 ? <DigitalCounter initialValue={10} step={3} label="Cantidad de servidores" /> :
+    PASO === 15 ? <UserProfileForm /> :
+    PASO === 16 ? <TaskManager /> :
+    //Hooks: effect
+    PASO === 17 ? <DocumentTitle /> :
+    PASO === 18 ? <FetchUser /> :
+    //Hooks: ref
+    PASO === 19 ? <AutoFocusForm /> :
+    PASO === 20 ? <InlineEditor /> :
+
     <p style={{ color: '#e00' }}>Paso {PASO}: crea el componente primero</p>
 
   return (
