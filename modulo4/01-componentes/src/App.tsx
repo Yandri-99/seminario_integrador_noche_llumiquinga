@@ -8,6 +8,18 @@ import DocumentTitle from './use-effect/DocumentTitle'
 import FetchUser from './use-effect/FetchUser'
 import AutoFocusForm from './use-reft/AutoFocusForm'
 import InlineEditor from './use-reft/InlineEditor'
+import BasicCounter from './use-reducer/BasicCounter'
+import RegistrationForm from './use-reducer/RegistrationForm'
+import LoginForm from './use-context/LoginForm'
+import UserBadge from './use-context/UserBadge'
+import AppHeader from './use-context/AppHeader'
+import { useAuth } from './context/AuthContext'
+import { ThemeProvider } from './context/ThemeContext'
+import PrimeSieve from './use-memo/PrimeSieve'
+import FilteredCatalog from './use-memo/FilteredCatalog'
+import MemoizedList from './use-callback/MemoizedList'
+import SearchWithFetch from './use-callback/SearchWithFetch'
+import ThemeSelector from './customhooks/ThemeSelector'
 
 // ┌──────────────────────────────────────────────────────────────────────────┐
 // │  Cambia PASO y guarda (Ctrl+S) para navegar entre componentes.          │
@@ -25,7 +37,7 @@ import InlineEditor from './use-reft/InlineEditor'
 // │  12  ProductCatalogList  — lista con renderizado condicional de items   │
 // │  13  UserProfileCard     — ejercicio: props complejas + rol             │
 // └──────────────────────────────────────────────────────────────────────────┘
-const PASO = 18
+const PASO = 91
 
 const fruits = [
   { name: 'Manzana', emoji: '🍎', calories: 52 },
@@ -41,6 +53,7 @@ const catalog = [
 ]
 
 export default function App() {
+  const { state } = useAuth()
   const content =
     /*PASO ===  1 ? <WelcomeBanner /> :
     PASO ===  2 ? <UserGreeting name="Ana García" occupation="Desarrolladora Frontend" /> :
@@ -100,21 +113,47 @@ export default function App() {
       />
     ) :*/
     //Hooks: state
-    PASO === 14 ? <DigitalCounter initialValue={10} step={3} label="Cantidad de servidores" /> :
-    PASO === 15 ? <UserProfileForm /> :
-    PASO === 16 ? <TaskManager /> :
+    PASO === 20 ? <DigitalCounter initialValue={10} step={3} label="Cantidad de servidores" /> :
+    PASO === 21 ? <UserProfileForm /> :
+    PASO === 22 ? <TaskManager /> :
     //Hooks: effect
-    PASO === 17 ? <DocumentTitle /> :
-    PASO === 18 ? <FetchUser /> :
+    PASO === 30 ? <DocumentTitle /> :
+    PASO === 31 ? <FetchUser /> :
     //Hooks: ref
-    PASO === 19 ? <AutoFocusForm /> :
-    PASO === 20 ? <InlineEditor /> :
+    PASO === 40 ? <AutoFocusForm /> :
+    PASO === 41 ? <InlineEditor /> :
+    //Hooks: reducer
+    PASO === 50 ? <BasicCounter /> :
+    PASO === 51 ? <RegistrationForm /> :
+    //Hooks: context
+    PASO === 60 ? <ThemeProvider><UserBadge /></ThemeProvider> :
+    PASO === 61 ? <UserBadge /> :
+    PASO === 62 ? <LoginForm /> :
+    PASO === 63 ? <AppHeader /> :
+    //Hooks: memo
+    PASO === 70 ? <PrimeSieve /> :
+    PASO === 71 ? <FilteredCatalog /> :
+    //Hooks: callback
+    PASO === 80 ? <MemoizedList /> :
+    PASO === 81 ? <SearchWithFetch /> :
+    //Hooks: customs hooks
+    PASO === 90 ? <ThemeSelector /> :
+    PASO === 91 ? <useLocalStorage /> :
 
     <p style={{ color: '#e00' }}>Paso {PASO}: crea el componente primero</p>
 
   return (
-    <main style={{ maxWidth: 540, margin: '40px auto', fontFamily: 'sans-serif', padding: '0 16px' }}>
-      {content}
+    <main style={{ maxWidth: 600, margin: '40px auto', fontFamily: 'sans-serif', padding: '0 16px' }}>
+      {PASO === 64 ? content : (
+        <>
+          {state.user && (
+            <p style={{ marginBottom: 16, fontSize: 14, color: '#6b7280' }}>
+              Sesión activa: <strong>{state.user.name}</strong>
+            </p>
+          )}
+          {content}
+        </>
+      )}
     </main>
   )
 }
