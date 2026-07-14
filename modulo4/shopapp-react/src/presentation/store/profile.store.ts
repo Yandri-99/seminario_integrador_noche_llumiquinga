@@ -15,6 +15,7 @@ interface ProfileState {
 interface ProfileActions {
   fetchProfile(): Promise<void>
   updateProfile(dto: UpdateProfileDto): Promise<void>
+  uploadAvatar(file: File): Promise<void>
   clearProfile(): void
   clearError(): void
 }
@@ -48,6 +49,17 @@ export const useProfileStore = create<ProfileState & ProfileActions>((set) => ({
       throw err
     } finally {
       set({ isSaving: false })
+    }
+  },
+
+  async uploadAvatar(file) {
+    try {
+      const profile = await userUseCase.uploadAvatar(file)
+      set({ profile })
+    } catch (err) {
+      const message = err instanceof ApiException ? err.detail : 'No se pudo subir el avatar.'
+      set({ error: message })
+      throw err
     }
   },
 

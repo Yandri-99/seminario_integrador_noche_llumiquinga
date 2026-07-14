@@ -10,6 +10,7 @@ import { Loader2, ShieldCheck, ExternalLink } from 'lucide-react'
 import { useAuthStore } from '@/presentation/store/auth.store'
 import { useProfileStore } from '@/presentation/store/profile.store'
 import { UserAvatar } from '@/presentation/components/UserAvatar'
+import { ImageUploader } from '@/presentation/components/ImageUploader'
 
 import {
   Card,
@@ -39,7 +40,7 @@ type ProfileFormData = z.infer<typeof profileSchema>
 
 export default function ProfilePage() {
   const isStaff = useAuthStore((s) => s.user?.is_staff)
-  const { profile, isLoading, isSaving, error, fetchProfile, updateProfile } = useProfileStore()
+  const { profile, isLoading, isSaving, error, fetchProfile, updateProfile, uploadAvatar } = useProfileStore()
 
   useEffect(() => {
     fetchProfile()
@@ -143,6 +144,15 @@ export default function ProfilePage() {
                   <dd>{profile?.last_name || '—'}</dd>
                 </div>
               </dl>
+
+              <div className="flex flex-col items-center gap-3 border-t pt-6">
+                <h3 className="text-sm font-medium text-muted-foreground">Foto de perfil</h3>
+                <ImageUploader
+                  currentImageUrl={profile?.avatar_url ?? null}
+                  onUpload={uploadAvatar}
+                  circular
+                />
+              </div>
             </CardContent>
           </Card>
         </TabsContent>

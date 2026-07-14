@@ -40,4 +40,8 @@ deleteProduct(id: number): Promise<void> {
 restockProduct(id: number, quantity: number): Promise<{ id: number; name: string; new_stock: number }> {
   return this.productRepository.restockProduct(id, quantity)
 }
+
+uploadImage(id: number, file: File): Promise<Product> {
+  return this.productRepository.uploadImage(id, file)
+}
 }
