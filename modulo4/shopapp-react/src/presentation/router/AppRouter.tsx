@@ -4,10 +4,10 @@ import { Suspense, lazy, useEffect } from 'react'
 import { useAuthStore } from '@/presentation/store/auth.store'
 import ProtectedRoute from './ProtectedRoute'
 import AppShell from '../components/AppShell'
-import PlaceholderPage from '../pages/PlaceholderPage'
 import CatalogPage from '../pages/catalog/CatalogPage'
 import ProductDetailPage from '../pages/catalog/ProductDetailPage'
 import CheckoutPage from '../pages/orders/CheckoutPage'
+import AdminCategoriesPage from '../pages/admin/AdminCategoriesPage'
 
 // ─── Lazy imports ─────────────────────────────────────────────────────────────
 
@@ -21,6 +21,12 @@ const OrderDetailPage = lazy(() => import('../pages/orders/OrderDetailPage'))
 // El resto de páginas todavía no existen: se implementan en módulos posteriores
 // (Catálogo → 4/5, Carrito → 6, Órdenes → 7, Perfil → 8, Admin → 9-13) y cada uno
 // reemplaza aquí su propio <Route> por un lazy import real.
+const ProfilePage = lazy(() => import('../pages/profile/ProfilePage'))
+const AdminProductsPage = lazy(() => import('../pages/admin/AdminProductsPage'))
+const AdminOrdersPage = lazy(() => import('../pages/admin/AdminOrdersPage'))
+const AdminOrderDetailPage = lazy(() => import('../pages/admin/AdminOrderDetailPage'))
+const AdminUsersPage = lazy(() => import('../pages/admin/AdminUsersPage'))
+const AdminDashboardPage = lazy(() => import('../pages/admin/AdminDashboardPage'))
 
 // ─── Loader global ────────────────────────────────────────────────────────────
 
@@ -95,7 +101,7 @@ export default function AppRouter() {
               path="/profile"
               element={
                 <ProtectedRoute>
-                  <PlaceholderPage title="Perfil — Módulo 8" />
+                  <ProfilePage />
                 </ProtectedRoute>
               }
             />
@@ -105,7 +111,7 @@ export default function AppRouter() {
               path="/admin"
               element={
                 <ProtectedRoute requireStaff>
-                  <PlaceholderPage title="Admin Dashboard — Módulo 9" />
+                  <AdminDashboardPage/>
                 </ProtectedRoute>
               }
             />
@@ -113,7 +119,7 @@ export default function AppRouter() {
               path="/admin/categories"
               element={
                 <ProtectedRoute requireStaff>
-                  <PlaceholderPage title="Admin Categorías — Módulo 10" />
+                  <AdminCategoriesPage/>
                 </ProtectedRoute>
               }
             />
@@ -121,7 +127,7 @@ export default function AppRouter() {
               path="/admin/products"
               element={
                 <ProtectedRoute requireStaff>
-                  <PlaceholderPage title="Admin Productos — Módulo 11" />
+                  <AdminProductsPage />
                 </ProtectedRoute>
               }
             />
@@ -129,7 +135,15 @@ export default function AppRouter() {
               path="/admin/orders"
               element={
                 <ProtectedRoute requireStaff>
-                  <PlaceholderPage title="Admin Órdenes — Módulo 12" />
+                  <AdminOrdersPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/orders/:id"
+              element={
+                <ProtectedRoute requireStaff>
+                  <AdminOrderDetailPage />
                 </ProtectedRoute>
               }
             />
@@ -137,7 +151,7 @@ export default function AppRouter() {
               path="/admin/users"
               element={
                 <ProtectedRoute requireStaff>
-                  <PlaceholderPage title="Admin Usuarios — Módulo 13" />
+                  <AdminUsersPage />
                 </ProtectedRoute>
               }
             />
