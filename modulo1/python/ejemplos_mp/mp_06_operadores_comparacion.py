@@ -1,0 +1,10 @@
+print("Operadores de comparacion - Transporte")
+
+capacidad1 = float(input("Capacidad del bus 1: "))
+capacidad2 = float(input("Capacidad del bus 2: "))
+print(capacidad1, "==", capacidad2, capacidad1 == capacidad2)
+print(capacidad1, "!=", capacidad2, capacidad1 != capacidad2)
+print(capacidad1, ">", capacidad2, capacidad1 > capacidad2)
+print(capacidad1, "<", capacidad2, capacidad1 < capacidad2)
+print(capacidad1, ">=", capacidad2, capacidad1 >= capacidad2)
+print(capacidad1, "<=", capacidad2, capacidad1 <= capacidad2)
